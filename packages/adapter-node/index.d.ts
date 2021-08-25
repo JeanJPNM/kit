@@ -11,6 +11,12 @@ interface AdapterOptions {
 	};
 	esbuild?: (options: BuildOptions) => Promise<BuildOptions> | BuildOptions;
 }
-
+interface HandlerOptions {
+	build: string;
+	dev: boolean;
+}
 declare function plugin(options?: AdapterOptions): Adapter;
-export = plugin;
+
+export default plugin;
+
+export declare function svelteKit(options: HandlerOptions): any;

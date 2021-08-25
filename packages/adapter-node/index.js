@@ -20,7 +20,7 @@ const pipe = promisify(pipeline);
  * @typedef {import('esbuild').BuildOptions} BuildOptions
  */
 
-/** @type {import('.')} */
+/** @type {import('.').default} */
 export default function ({
 	out = 'build',
 	precompress,
@@ -82,7 +82,14 @@ export default function ({
 		}
 	};
 }
-
+/** @type {import('.').svelteKit}*/
+export async function svelteKit({ build, dev }) {
+	if (dev) {
+		const { startServer } = await import('@sveltejs/kit/adapter-dev');
+		const handler = await startServer();
+		return handler;
+	}
+}
 /**
  * @param {string} directory
  */
